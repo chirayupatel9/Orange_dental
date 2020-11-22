@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block ht %}Details{% endblock %}
+{% block content %}
+    <form method="post" action="">
+        <center>
+            <div class="card border-primary mb-3">
+                <div class="card-header bg-transparent border-primary">
+                     <h5 class="card-title">Enter your details for appointment</h5>
+                </div>
+                <div class="card-body">
+                    <label>Name:</label>
+                    <input type="text" name="enteryourname" placeholder="Enter your Name"><br><br>
+                    <label>Number:</label>
+                    <input type="number" name="enteryournumber" placeholder="Enter your contact number"><br><br>
+                    <label>Procedure:</label><br><br>
+
+                    <input type="radio" id="crown" name="proced" value="crown">
+                    <label for="male">Crown</label><br>
+                    <input type="radio" id="cleaning" name="proced" value="cleaing">
+                    <label for="female">Cleaning</label><br>
+                    <input type="radio" id="other" name="proced" value="other">
+                    <label for="other">Other</label><br><br>
+                    <input type="text" name="insurance" placeholder="Enter your insurance"><br><br>
+                    <input type="submit" value="SUBMIT" class="btn btn-primary">
+                </div>
+            </div>
+        </center>
+    </form>
+{% endblock %}

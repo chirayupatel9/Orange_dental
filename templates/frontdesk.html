@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block ht %}Details{% endblock %}
+{% block content %}
+    <div class="card-group">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Name of Patient</h5>
+                <p class="card-text">{% for row in data %}
+                    {{ row[0] }}<br>
+                {% endfor %}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Procedure</h5>
+                <p class="card-text">{% for row in data %}
+                    {{ row[2] }}<br>
+                {% endfor %}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Insurance</h5>
+                <p class="card-text">{% for row in data %}
+                    {{ row[3] }}<br>
+                {% endfor %}</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Patient Contact Number</h5>
+                <p class="card-text">{% for row in data %}
+                    <a href="sms://{{ row[1] }}?body=I%27m%20interested%20in%20your%20product.%20Please%20contact%20me.">{{ row[1] }}</a><br>
+{#                    {{ row[1] }}<br>#}
+                {% endfor %}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter few details</title>
+</head>
+<body>
+<form action="{{ url_for("thankyou") }}" method="POST">
+    <input type="radio" id="Crown" name="Procedure" value="Crown">
+    <label for="male">Crown</label><br>
+    <input type="radio" id="Cleaning" name="Procedure" value="Cleaning">
+    <label for="female">Cleaning</label><br>
+    <input type="radio" id="Others" name="Procedure" value="Other">
+    <label for="other">Others</label>
+    <input type="submit" name="submit" placeholder="Done">
+</form>
+</body>
+</html>
