@@ -1,6 +1,7 @@
 import mysql.connector
 from mysql.connector import Error, connection
 import webbrowser
+import datetime
 
 try:
     connection = mysql.connector.connect(host='localhost',
@@ -15,16 +16,17 @@ except mysql.connector.Error as error:
 
 
 def insertVariblesIntoTable(name, number, proced, insurance):
-    mySql_insert_query = """INSERT INTO myoffice (name,number,proced,insurance) 
-                                VALUES (%s, %s, %s, %s) """
-    recordTuple = (name, number, proced, insurance)
+    x = datetime.datetime.now()
+    mySql_insert_query = """INSERT INTO myoffice (name,number,proced,insurance,rdate) 
+                                VALUES (%s, %s, %s, %s, %s) """
+    recordTuple = (name, number, proced, insurance, x)
     cursor.execute(mySql_insert_query, recordTuple)
     connection.commit()
     # print("Record inserted successfully into Laptop table")
     return print("Thank you")
 
+# insertVariblesIntoTable("sha", 9081985540, "cleaning", "yes")
 
-# insertVariblesIntoTable("johnny",421,"cleaning","yes")
 
 def printvaluesfrommyoffice():
     mycursor = connection.cursor()
@@ -36,15 +38,16 @@ def printvaluesfrommyoffice():
     return myresult
 
 
-# # print(printvaluesfrommyoffice())
-# def trylogin():
+# DELETE FROM myoffice;
+# def checkin(boo):
 #     mycursor = connection.cursor()
-#
-#     rs = mycursor.fetchall()
-#     return print(rs)
-# print(trylogin())
-# # print(trylogin("chirayu","abc@123"))
+#     mySql_insert_query = """INSERT INTO myoffice (check_in) VALUES (%s)"""
+#     recordTuple = (boo)
+#     cursor.execute(mySql_insert_query, recordTuple)
+#     connection.commit()
+#     return print("DOne")
 
+# checkin(1)
 
 def tryregister(username, password, email):
     mycursor = connection.cursor()

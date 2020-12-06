@@ -1,15 +1,21 @@
 {% extends "base.html" %}
 {% block ht %}Details{% endblock %}
 {% block content %}
-        <center>
-            <div class="card border-success mb-3" style="max-width: 18rem;">
-  <div class="card-header bg-transparent border-success">Your Appointed has been received</div>
-  <div class="card-body text-success">
-    <h5 class="card-title">Our FrontDesk will contact you soon.</h5>
-    <p class="card-text"></p>
-  </div>
-  <div class="card-footer bg-transparent border-success">Thank you</div>
-</div>
-        </center>
+    <center>
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-transparent border-success">Your Appointed has been received</div>
+            <div class="card-body text-success">
+                <h5 class="card-title">Our FrontDesk will contact you soon.</h5>
+                <h5 class="card-title">Review Your Information</h5>
+                <p class="card-text">
+                        Your Name: {{ data[0] }}<br>
+                        Phone: {{ data[1] }}<br>
+                        Procedure: {{ data[2] }}<br>
+                        Insurance: {{ data[3] }}<br>
+                </p>
+            </div>
+            <div class="card-footer bg-transparent border-success">Thank you</div>
+        </div>
+    </center>
     </form>
 {% endblock %}

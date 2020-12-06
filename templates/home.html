@@ -1,29 +1,106 @@
 {% extends "base.html" %}
-{% block ht %}Details{% endblock %}
+{% block ht %}Details
+{% endblock %}
 {% block content %}
     <form method="post" action="">
-        <center>
+        <div style="text-align: center;">
             <div class="card border-primary mb-3">
                 <div class="card-header bg-transparent border-primary">
-                     <h5 class="card-title">Enter your details for appointment</h5>
+                    <h5 class="card-title">Enter your details for appointment</h5>
                 </div>
                 <div class="card-body">
                     <label>Name:</label>
                     <input type="text" name="enteryourname" placeholder="Enter your Name"><br><br>
                     <label>Number:</label>
-                    <input type="number" name="enteryournumber" placeholder="Enter your contact number"><br><br>
-                    <label>Procedure:</label><br><br>
+                    <input type="number" name="enteryournumber" placeholder="Enter your contact number"
+                           maxlength="10"><br><br>
+                    <label>Procedure:</label>
 
-                    <input type="radio" id="crown" name="proced" value="crown">
-                    <label for="male">Crown</label><br>
-                    <input type="radio" id="cleaning" name="proced" value="cleaing">
-                    <label for="female">Cleaning</label><br>
-                    <input type="radio" id="other" name="proced" value="other">
-                    <label for="other">Other</label><br><br>
-                    <input type="text" name="insurance" placeholder="Enter your insurance"><br><br>
+                    <input type="text" id="proced" name="proced" list="json-datalist"
+                           placeholder="What kind of treatment you want">
+                    <datalist id="json-datalist"></datalist>
+                    <br><br>
+                    <label>Insurance:</label>
+
+                    <input type="text" id="insurance" list="json-datalist-insurance" name="insurance"
+                           placeholder="Enter your insurance">
+                    <datalist id="json-datalist-insurance"></datalist>
+                    <br><br>
+
                     <input type="submit" value="SUBMIT" class="btn btn-primary">
                 </div>
             </div>
-        </center>
+        </div>
     </form>
+    <script>
+        function autocomplete() {
+            var dataList = document.getElementById('json-datalist-insurance');
+            var input = document.getElementById('insurance');
+
+            // Create a new XMLHttpRequest.
+            var request = new XMLHttpRequest();
+
+            request.onreadystatechange = function (response) {
+                if (request.readyState === 4) {
+                    if (request.status === 200) {
+                        // Parse the JSON
+                        var jsonOptions = JSON.parse(request.responseText);
+
+                        // Loop over the JSON array.
+                        jsonOptions.forEach(function (item) {
+                            // Create a new <option> element.
+                            var option = document.createElement('option');
+                            // Set the value using the item in the JSON array.
+                            option.value = item;
+                            // Add the <option> element to the <datalist>.
+                            dataList.appendChild(option);
+                        });
+
+                        // Update the placeholder text.
+                    } else {
+                        input.placeholder = "Couldn't load :(";
+                    }
+                }
+            };
+            request.open('GET', '../static/temp.txt', true);
+            request.send();
+
+        }
+
+        function autocomplete2() {
+            var datalist2 = document.getElementById('json-datalist')
+            var input2 = document.getElementById('proced');
+            var request2 = new XMLHttpRequest();
+
+            request2.onreadystatechange = function (response) {
+                if (request2.readyState === 4) {
+                    if (request2.status === 200) {
+                        // Parse the JSON
+                        var jsonOptions = JSON.parse(request2.responseText);
+
+                        // Loop over the JSON array.
+                        jsonOptions.forEach(function (item) {
+                            // Create a new <option> element.
+                            var option = document.createElement('option');
+                            // Set the value using the item in the JSON array.
+                            option.value = item;
+                            // Add the <option> element to the <datalist>.
+                            datalist2.appendChild(option);
+                        });
+
+                        // Update the placeholder text.
+                    } else {
+                        input2.placeholder = "Couldn't load :(";
+                    }
+                }
+            };
+
+            request2.open('GET', '../static/proced.json', true);
+            request2.send();
+        }
+
+        autocomplete(document.getElementById("insurance"))
+        autocomplete2(document.getElementById("proced"))
+    </script>
+
 {% endblock %}

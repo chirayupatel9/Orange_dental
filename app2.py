@@ -3,46 +3,28 @@ from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
 import dbsql
-import app2
-import datetime
-app = Flask(__name__)
-app.secret_key = "hello"
-app.static_folder = 'static'
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'orangedental'
+app1 = Flask(__name__)
+app1.secret_key = "hello"
+app1.static_folder = 'static'
 
-mysql = MySQL(app)
+app1.config['MYSQL_HOST'] = 'localhost'
+app1.config['MYSQL_USER'] = 'root'
+app1.config['MYSQL_PASSWORD'] = ''
+app1.config['MYSQL_DB'] = 'orangedental'
+
+mysql = MySQL(app1)
 
 
-@app.route('/', methods=["POST", "GET"])
+@app1.route("/")
 def home():
-    if request.method == "GET":
-        if 'loggedin' not in session:
-            return redirect(url_for('login', message="Login first"))
-        return render_template("home.html")
-    else:
-        name = request.form["enteryourname"]
-        number = request.form["enteryournumber"]
-        proced = request.form["proced"]
-        insu = request.form["insurance"]
-        dbsql.insertVariblesIntoTable(name, number, proced, insu)
-        return render_template("thankyou.html",data = [name,number,proced,insu])
-
-
-@app.route('/front', methods=["POST", "GET"])
+    return "heel"
+@app1.route('/front', methods=["POST", "GET"])
 def front():
     a = dbsql.printvaluesfrommyoffice()
-    if request.method == 'POST':
-        request.form.get('customSwitch1')
-        return 'done'
-    else:
-        return render_template("frontdesk.html", data=a)
+    return render_template("frontdesk.html", data=a)
 
-
-@app.route('/login', methods=['GET', 'POST'])
+@app1.route('/login', methods=['GET', 'POST'])
 def login():
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
@@ -63,7 +45,7 @@ def login():
     return render_template('login.html', msg=msg)
 
 
-@app.route('/logout')
+@app1.route('/logout')
 def logout():
     session.pop('loggedin', None)
     session.pop('id', None)
@@ -71,7 +53,7 @@ def logout():
     return redirect(url_for('login'))
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@app1.route('/register', methods=['GET', 'POST'])
 def register():
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form:
@@ -97,6 +79,6 @@ def register():
         msg = 'Please fill out the form !'
     return render_template('register.html', msg=msg)
 
+
 if __name__ == '__main__':
-    app.run()
-    app2.run()
+    app1.run()

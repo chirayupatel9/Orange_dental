@@ -30,10 +30,37 @@
             <div class="card-body">
                 <h5 class="card-title">Patient Contact Number</h5>
                 <p class="card-text">{% for row in data %}
-                    <a href="sms://{{ row[1] }}?body=I%27m%20interested%20in%20your%20product.%20Please%20contact%20me.">{{ row[1] }}</a><br>
-{#                    {{ row[1] }}<br>#}
+                    <a href="sms://{{ row[1] }}?body=I%27m%20interested%20in%20your%20product.%20Please%20contact%20me.">{{ row[1] }}</a>
+                    <a href="https://wa.me/+91  {{ row[1] }}">{{ row[1] }}</a>
+                    <br>
+                    {#                    {{ row[1] }}<br>#}
                 {% endfor %}</p>
             </div>
         </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Patient Check-in</h5>
+                <p class="card-text">
+                <form method="POST">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                        <label class="custom-control-label" for="customSwitch1">Doctor allotted</label>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('input[type="checkbox"]').click(function () {
+                if ($(this).prop("checked") == true) {
+                    console.log("Checkbox is checked.");
+                } else if ($(this).prop("checked") == false) {
+                    console.log("Checkbox is unchecked.");
+                }
+            });
+        });
+    </script>
+
 {% endblock %}
