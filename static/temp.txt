@@ -1,5 +1,4 @@
 [
-
   "UnitedHealtiser Foundation",
   "Anthem Inc.",
   "Humana",
